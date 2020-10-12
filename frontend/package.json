@@ -1,0 +1,28 @@
+{
+  "name": "poc-rsocket-jwt",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "tsc-version": "tsc --version",
+    "build": "webpack"
+  },
+  "keywords": [
+    "rsocket"
+  ],
+  "author": "sebczu",
+  "license": "MIT",
+  "dependencies": {
+    "@types/rsocket-core": "0.0.5",
+    "@types/rsocket-websocket-client": "0.0.3",
+    "rsocket-core": "0.0.19",
+    "rsocket-flowable": "0.0.14",
+    "rsocket-tcp-client": "0.0.19",
+    "rsocket-websocket-client": "0.0.19",
+    "ts-loader": "^8.0.4",
+    "typescript": "^4.0.3",
+    "webpack": "^5.0.0",
+    "webpack-cli": "^4.0.0"
+  },
+  "devDependencies": {}
+}

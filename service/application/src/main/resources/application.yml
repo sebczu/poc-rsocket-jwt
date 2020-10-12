@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: poc-rsocket-jwt
+  rsocket:
+    server:
+      port: 7000
+      transport: websocket
+
+management:
+  endpoints:
+    web:
+      exposure:
+        includ: "*"
+
+logging.level.io.rsocket.FrameLogger: DEBUG
