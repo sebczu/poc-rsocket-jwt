@@ -59,7 +59,7 @@ public class JwtTokenGenerator extends RSocketJwtApplicationTest {
 
   private static Stream<Arguments> input() {
     return Stream.of(
-        Arguments.of("example")
+        Arguments.of("user1")
     );
   }
 
@@ -107,6 +107,7 @@ public class JwtTokenGenerator extends RSocketJwtApplicationTest {
   private JWTClaimsSet getClaims(String subject, TemporalAmount duration) {
     return new JWTClaimsSet.Builder()
         .subject(subject)
+        .claim("scope", "USER")
         .expirationTime(getExpirationDate(duration))
         .build();
   }

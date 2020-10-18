@@ -3,9 +3,12 @@ package com.sebczu.poc.rsocket.jwt.security;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.messaging.rsocket.RSocketStrategies;
+import org.springframework.messaging.rsocket.annotation.support.RSocketMessageHandler;
 import org.springframework.security.authentication.ReactiveAuthenticationManager;
 import org.springframework.security.config.annotation.rsocket.EnableRSocketSecurity;
 import org.springframework.security.config.annotation.rsocket.RSocketSecurity;
+import org.springframework.security.messaging.handler.invocation.reactive.AuthenticationPrincipalArgumentResolver;
 import org.springframework.security.oauth2.jose.jws.SignatureAlgorithm;
 import org.springframework.security.oauth2.jwt.NimbusReactiveJwtDecoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
@@ -24,6 +27,8 @@ public class RSocketSecurityConfiguration {
   public PayloadSocketAcceptorInterceptor rsocketInterceptor(RSocketSecurity security) {
     return security.authorizePayload(authorizeSpec ->
         authorizeSpec.setup()
+            .hasAuthority("SCOPE_USER")
+            .anyExchange()
             .permitAll())
         .jwt(jwtSpec -> jwtSpec.authenticationManager(jwtReactiveAuthenticationManager()))
         .build();
@@ -41,4 +46,11 @@ public class RSocketSecurityConfiguration {
     return jwtReactiveAuthenticationManager;
   }
 
+  @Bean
+  public RSocketMessageHandler messageHandler(RSocketStrategies strategies) {
+    RSocketMessageHandler messageHandler = new RSocketMessageHandler();
+    messageHandler.getArgumentResolverConfigurer().addCustomResolver(new AuthenticationPrincipalArgumentResolver());
+    messageHandler.setRSocketStrategies(strategies);
+    return messageHandler;
+  }
 }

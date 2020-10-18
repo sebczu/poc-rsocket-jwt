@@ -19,6 +19,7 @@ public class ConnectorController {
   @ConnectMapping("setup")
   public void setup(@Headers Map<String,Object> headers, RSocketRequester requester, @Payload String client) {
     showHeaders(headers);
+
     requester.rsocket()
         .onClose()
         .doFirst(() -> {
