@@ -59,7 +59,8 @@ public class JwtTokenGenerator extends RSocketJwtApplicationTest {
 
   private static Stream<Arguments> input() {
     return Stream.of(
-        Arguments.of("user1")
+        Arguments.of("user1"),
+        Arguments.of("user2")
     );
   }
 

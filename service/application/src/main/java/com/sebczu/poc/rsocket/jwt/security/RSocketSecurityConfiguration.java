@@ -26,10 +26,10 @@ public class RSocketSecurityConfiguration {
   @Bean
   public PayloadSocketAcceptorInterceptor rsocketInterceptor(RSocketSecurity security) {
     return security.authorizePayload(authorizeSpec ->
-        authorizeSpec.setup()
-            .hasAuthority("SCOPE_USER")
-            .anyExchange()
-            .permitAll())
+        authorizeSpec
+            .setup().authenticated()
+//            .hasAuthority("SCOPE_USER")
+            .anyExchange().permitAll())
         .jwt(jwtSpec -> jwtSpec.authenticationManager(jwtReactiveAuthenticationManager()))
         .build();
   }
@@ -46,6 +46,7 @@ public class RSocketSecurityConfiguration {
     return jwtReactiveAuthenticationManager;
   }
 
+  //configuration to possibility use @AuthenticationPrincipal
   @Bean
   public RSocketMessageHandler messageHandler(RSocketStrategies strategies) {
     RSocketMessageHandler messageHandler = new RSocketMessageHandler();
