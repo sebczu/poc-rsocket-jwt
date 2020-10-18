@@ -11,7 +11,6 @@ import { EventLog } from "./eventLog";
 let clientId = Math.floor((Math.random() * 10000) + 1);
 let keepAlive = 60000;
 let lifetime = 70000;
-let tryToConnect = true;
 let client: RSocketClient<any, Encodable>;
 
 const eventLog = new EventLog();
@@ -47,24 +46,15 @@ function createClient() {
 
 function connect() {
   eventLog.add("connection: click");
-  tryToConnect = true;
   tryConnect();
 }
 
 function disconnect() {
   eventLog.add("disconnect: click");
-  tryToConnect = false;
-  if (client != null) {
-    client.close();
-  }
+  client.close();
 }
 
 function tryConnect() {
-  if (!tryToConnect) {
-    eventLog.add("disconnect");
-    return;
-  }
-
   createClient();
 
   client.connect().subscribe({
@@ -77,16 +67,11 @@ function tryConnect() {
         } else {
           eventLog.add("connection status: status " + connectionStatus.kind);
         }
-
-        if (connectionStatus.kind == 'CLOSED' || connectionStatus.kind == 'ERROR') {
-          tryConnectTimeout();
-        }
       });
 
     },
     onError: error => {
       eventLog.add("connection: error " + error);
-      tryConnectTimeout();
     },
     onSubscribe: cancel => {
       eventLog.add("connection: on subscribe");
@@ -94,11 +79,6 @@ function tryConnect() {
   });
 }
 
-function tryConnectTimeout() {
-  setTimeout(() => { 
-    tryConnect(); 
-  }, 1000);
-}
 
 document.getElementById("connect").addEventListener('click', (e:Event) => connect());
 document.getElementById("disconnect").addEventListener('click', (e:Event) => disconnect());
