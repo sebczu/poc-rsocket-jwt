@@ -17,6 +17,8 @@ let client: RSocketClient<any, Encodable>;
 const eventLog = new EventLog();
 
 function createClient() {
+  let tokenJWT = (document.getElementById("tokenJWT") as HTMLInputElement).value;
+
   client = new RSocketClient({
     // serializers: {
     //   data: JsonSerializer,
@@ -29,7 +31,7 @@ function createClient() {
         metadata: encodeAndAddCustomMetadata(
           Buffer.alloc(0),
           "message/x.rsocket.authentication.bearer.v0",
-          Buffer.from('eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE2MDMzNzk2NjEsInN1YiI6ImV4YW1wbGUifQ.lDBznz1-GdrLYzEWfY1iFoOwerRfKV5AV8vkWtyLHjEJkoSeac6MywDP4zVM94GaAPhzLzIgcxT18DeFyLgCJSudbAiXciWmcE59jqTt2KoLt8FURoNDpDIT53WHVt3AvsbECut0hzTJxXPlxaxMF97mPN0ARA3lmkBkmajhfcIRf3RIdH5zQJIGNv8G4OpxkSRQGDBEaBck-wkkb0-YJwk0IU8G8Y-McwgvGNtuK43b9-vGg0SjZ_wwO--XDDAopouaMreYp2JSYI2iRksNmEpGCrK8JuBLPm_bzZ6KfzD275FjA8peFmU-61qa-lysUzRh6ybs7zeylAwnSzhM4Q')
+          Buffer.from(tokenJWT)
         )
       },
       keepAlive: keepAlive,
