@@ -10,10 +10,8 @@ import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.SignedJWT;
 import com.sebczu.poc.rsocket.jwt.security.JwtPublicKeyProperty;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.security.KeyFactory;
 import java.security.NoSuchAlgorithmException;
@@ -29,10 +27,10 @@ import java.time.Period;
 import java.time.temporal.TemporalAmount;
 import java.util.Base64;
 import java.util.Date;
-import java.util.stream.Stream;
 
 @Slf4j
-public class JwtTokenGenerator extends RSocketJwtApplicationTest {
+@Component
+public class JwtTokenGenerator {
 
   private final static JWSAlgorithm ALGORITHM = JWSAlgorithm.RS256;
   private final static Base64.Decoder DECODER = Base64.getMimeDecoder();
@@ -42,26 +40,26 @@ public class JwtTokenGenerator extends RSocketJwtApplicationTest {
   @Autowired
   private JwtPrivateKeyProperty privateKeyProperty;
 
-  @ParameterizedTest
-  @MethodSource("input")
-  public void generateTokenJWT(String subject) throws JOSEException, InvalidKeySpecException, NoSuchAlgorithmException, ParseException {
+  public String generateTokenJWT(String subject) throws JOSEException, InvalidKeySpecException, NoSuchAlgorithmException, ParseException {
+    return generateTokenJWT(subject, "USER", Period.ofYears(100));
+  }
+
+  public String generateTokenJWT(TemporalAmount duration) throws JOSEException, InvalidKeySpecException, NoSuchAlgorithmException, ParseException {
+    return generateTokenJWT("user-id-123", "USER", duration);
+  }
+
+  public String generateTokenJWT(String subject, String scope, TemporalAmount duration) throws JOSEException, InvalidKeySpecException, NoSuchAlgorithmException, ParseException {
     String privateJwk = privatePemToJwk(privateKeyProperty.getPrivateKey(), publicKeyProperty.getPublicKey());
 
     RSAKey rsaPrivate = RSAKey.parse(privateJwk);
     JWSSigner signer = new RSASSASigner(rsaPrivate);
 
-    SignedJWT jwt = new SignedJWT(getHeader(), getClaims(subject, Period.ofYears(100)));
+    SignedJWT jwt = new SignedJWT(getHeader(), getClaims(subject, scope, duration));
     jwt.sign(signer);
     String tokenJwt = jwt.serialize();
     System.out.println("token:");
     System.out.println(tokenJwt);
-  }
-
-  private static Stream<Arguments> input() {
-    return Stream.of(
-        Arguments.of("user1"),
-        Arguments.of("user2")
-    );
+    return tokenJwt;
   }
 
   public String privatePemToJwk(String privatePem, String publicPem) throws InvalidKeySpecException, NoSuchAlgorithmException {
@@ -105,10 +103,10 @@ public class JwtTokenGenerator extends RSocketJwtApplicationTest {
         .build();
   }
 
-  private JWTClaimsSet getClaims(String subject, TemporalAmount duration) {
+  private JWTClaimsSet getClaims(String subject, String scope, TemporalAmount duration) {
     return new JWTClaimsSet.Builder()
         .subject(subject)
-        .claim("scope", "USER")
+        .claim("scope", scope)
         .expirationTime(getExpirationDate(duration))
         .build();
   }

@@ -24,15 +24,9 @@ function createClient() {
   let host = (document.getElementById("host") as HTMLInputElement).value;
 
   client = new RSocketClient({
-    // serializers: {
-    //   data: JsonSerializer,
-    //   metadata: IdentitySerializer
-    // },
     setup: {
       payload: {
         data: Buffer.from("clientId-" + clientId),
-        // metadata: String.fromCharCode("setup".length) + "setup",
-
         metadata: encodeAndAddWellKnownMetadata(
           encodeAndAddCustomMetadata(
             Buffer.alloc(0),
@@ -42,17 +36,10 @@ function createClient() {
           MESSAGE_RSOCKET_ROUTING,
           Buffer.from(String.fromCharCode("setup".length) + "setup"),
         )
-
-        // metadata: encodeAndAddCustomMetadata(
-        //   Buffer.alloc(0),
-        //   "message/x.rsocket.authentication.bearer.v0",
-        //   Buffer.from(tokenJWT)
-        // )
       },
       keepAlive: keepAlive,
       lifetime: lifetime,
       dataMimeType: 'text/plain',
-      // metadataMimeType: 'message/x.rsocket.routing.v0',
       metadataMimeType: MESSAGE_RSOCKET_COMPOSITE_METADATA.string,
     },
     transport: new RSocketWebSocketClient({url: host}, BufferEncoders),
@@ -106,7 +93,6 @@ function send() {
       MESSAGE_RSOCKET_ROUTING,
       Buffer.from(String.fromCharCode("hello".length) + "hello"),
     )
-    // metadata: String.fromCharCode('hello'.length) + 'hello',
   }).subscribe({
     onComplete: payload => {
       eventLog.add("request: on complete data: " + payload.data + ", metadata: " + payload.metadata);
