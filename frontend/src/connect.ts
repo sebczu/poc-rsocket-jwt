@@ -21,6 +21,7 @@ const eventLog = new EventLog();
 
 function createClient() {
   let tokenJWT = (document.getElementById("tokenJWT") as HTMLInputElement).value;
+  let host = (document.getElementById("host") as HTMLInputElement).value;
 
   client = new RSocketClient({
     // serializers: {
@@ -54,7 +55,7 @@ function createClient() {
       // metadataMimeType: 'message/x.rsocket.routing.v0',
       metadataMimeType: MESSAGE_RSOCKET_COMPOSITE_METADATA.string,
     },
-    transport: new RSocketWebSocketClient({url: 'ws://localhost:7000'}, BufferEncoders),
+    transport: new RSocketWebSocketClient({url: host}, BufferEncoders),
     errorHandler: (error: Error) => eventLog.add("rsocket client error: " + error.message)
   });
 }
