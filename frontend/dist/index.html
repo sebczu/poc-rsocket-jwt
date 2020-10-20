@@ -3,22 +3,43 @@
 <body>
 <script type="module" src="bundle.js"></script>
 
-<h1>Hello rsocket jwt</h1>
+<h4>Hello rsocket jwt</h4>
 
-<div style="float:left; width:350px; padding: 30px">
+<div style="float:left; width:350px; padding:10px">
 
     <p style="display: block">Host:</p>
-    <input id="host" style="float:left; width:100%" value="ws://localhost:7000" />
+    <input id="host" style="display:block; width:100%" value="ws://localhost:7000" />
     <p style="display: block">Token JWT:</p>
-    <textarea  id="tokenJWT" cols="40" rows="15" style="float:left; width:100%">eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsInNjb3BlIjoiVVNFUiIsImV4cCI6NDc1ODcwODY0OH0.W_FZG3BV4UHWX5Exl6x_N3hXnggpVdzoWQu8TsmlE__zcQYxB13g_N8EwcmKnUZJAoHJTbeN8SBYsmme0qE3U3QZuGwT7KU7eqtBoPv99Mjsaf8jeHIBrcGkw-E_XDt-5VenaIsjWP7yeFI8K3M9dJY3z85lQ_iWH9vfbQgqGhuFgvXbxFIAK0hit9tDLv1Jx6rBdrSHowrpn9ZTSY-b3a5XS8CEgoE6n5RyZQkV_WE2W59_es2EJ1qr_5FP9EGMz0QogLGdTLg5zAbSmYcxtZdUQwRFKpbJIqhbwH92hcPEWH-7KMtTEFGROdzY7Fxs6y0657p-PfCNvFGTzsoPLw</textarea>
-    <button id="connect" style="margin: 20px">Connect</button>
-    <button id="disconnect" style="margin: 20px">Disconnect</button>
-    <input id="message" style="float:left; width:100%" value="example" />
-    <button id="send" style="margin: 20px">Send</button>
+    <textarea  id="tokenJWT" cols="40" rows="15" style="display:block; width:100%">eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsInNjb3BlIjoiVVNFUiIsImV4cCI6NDc1ODcwODY0OH0.W_FZG3BV4UHWX5Exl6x_N3hXnggpVdzoWQu8TsmlE__zcQYxB13g_N8EwcmKnUZJAoHJTbeN8SBYsmme0qE3U3QZuGwT7KU7eqtBoPv99Mjsaf8jeHIBrcGkw-E_XDt-5VenaIsjWP7yeFI8K3M9dJY3z85lQ_iWH9vfbQgqGhuFgvXbxFIAK0hit9tDLv1Jx6rBdrSHowrpn9ZTSY-b3a5XS8CEgoE6n5RyZQkV_WE2W59_es2EJ1qr_5FP9EGMz0QogLGdTLg5zAbSmYcxtZdUQwRFKpbJIqhbwH92hcPEWH-7KMtTEFGROdzY7Fxs6y0657p-PfCNvFGTzsoPLw</textarea>
+    <button id="connect" style="margin:20px">Connect</button>
+    <button id="disconnect" style="margin:20px">Disconnect</button>
 
+    <p style="display:block; font-weight:bold">Fire and forget:</p>
+    <p style="float:left; width:15%; margin:4px">Channel:</p>
+    <input id="routeFireAndForget" style="float:left; width:50%; margin:4px" value="fire.and.forget" />
+    <button id="sendFireAndForget" style="float:left; margin:4px">Send</button>
+    <input id="messageFireAndForget" style="float:left; width:100%; margin:4px" value="example" />
+
+    <p style="display:block; font-weight:bold">Request response:</p>
+    <p style="float:left; width:15%; margin:4px">Channel:</p>
+    <input id="routeRequestResponse" style="float:left; width:50%; margin:4px" value="request.response" />
+    <button id="sendRequestResponse" style="float:left; margin:4px">Send</button>
+    <input id="messageRequestResponse" style="float:left; width:100%; margin:4px" value="example" />
+    
+    <p style="display:block; font-weight:bold">Request stream:</p>
+    <p style="float:left; width:15%; margin:4px">Channel:</p>
+    <input id="routeRequestStream" style="float:left; width:50%; margin:4px" value="request.stream" />
+    <button id="sendRequestStream" style="float:left; margin:4px">Send</button>
+    <input id="messageRequestStream" style="float:left; width:100%; margin:4px" value="example" />
+
+    <p style="display:block; font-weight:bold">Request channel:</p>
+    <p style="float:left; width:15%; margin:4px">Channel:</p>
+    <input id="routeRequestChannel" style="float:left; width:50%; margin:4px" value="request.channel" />
+    <button id="sendRequestChannel" style="float:left; margin:4px">Send</button>
+    <input id="messageRequestChannel" style="float:left; width:100%; margin:4px" value="a,b,c,d,e,end" />
 </div>
 
-<div style="float:left; width:500px; padding: 30px">
+<div style="float:left; width:500px; padding:10px">
 
     <h3>Event log</h3>
     <ul id="eventLog">

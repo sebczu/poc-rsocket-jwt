@@ -46,7 +46,7 @@ public class RSocketSecurityConfiguration {
     return jwtReactiveAuthenticationManager;
   }
 
-  //configuration to possibility use @AuthenticationPrincipal
+  //configuration to possibility inject @AuthenticationPrincipal
   @Bean
   public RSocketMessageHandler messageHandler(RSocketStrategies strategies) {
     RSocketMessageHandler messageHandler = new RSocketMessageHandler();

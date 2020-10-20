@@ -45,11 +45,11 @@ public class InvalidRSocketJwtApplicationTest extends RSocketJwtApplicationTest 
   }
 
   private void verifyReject(String expectedMessage) {
-    Mono<Void> res = requester.rsocket()
+    Mono<Void> result = requester.rsocket()
         .onClose();
 
     StepVerifier
-        .create(res)
+        .create(result)
         .expectErrorSatisfies(ex -> {
           assertThat(ex)
               .isInstanceOf(RejectedSetupException.class)

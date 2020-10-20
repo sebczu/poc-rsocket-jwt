@@ -16,11 +16,11 @@ public class ValidRSocketJwtApplicationTest extends RSocketJwtApplicationTest {
   public void shouldConnectWhenValidToken() throws NoSuchAlgorithmException, InvalidKeySpecException, ParseException, JOSEException {
     buildRequester(tokenGenerator.generateTokenJWT("test"));
 
-    Mono<Void> res = requester.rsocket()
+    Mono<Void> result = requester.rsocket()
         .onClose();
 
     StepVerifier
-        .create(res)
+        .create(result)
         .expectComplete();
   }
 
@@ -31,11 +31,11 @@ public class ValidRSocketJwtApplicationTest extends RSocketJwtApplicationTest {
         .setupRoute("setup")
         .setupData("client-id"));
 
-    Mono<Void> res = requester.rsocket()
+    Mono<Void> result = requester.rsocket()
         .onClose();
 
     StepVerifier
-        .create(res)
+        .create(result)
         .expectComplete();
   }
 
