@@ -40,12 +40,20 @@ public class JwtTokenGenerator {
   @Autowired
   private JwtPrivateKeyProperty privateKeyProperty;
 
+  public String generateTokenJWT() throws JOSEException, InvalidKeySpecException, NoSuchAlgorithmException, ParseException {
+    return generateTokenJWT("user-id-123", "USER", Period.ofYears(100));
+  }
+
   public String generateTokenJWT(String subject) throws JOSEException, InvalidKeySpecException, NoSuchAlgorithmException, ParseException {
     return generateTokenJWT(subject, "USER", Period.ofYears(100));
   }
 
   public String generateTokenJWT(TemporalAmount duration) throws JOSEException, InvalidKeySpecException, NoSuchAlgorithmException, ParseException {
     return generateTokenJWT("user-id-123", "USER", duration);
+  }
+
+  public String generateTokenJWT(String scope, TemporalAmount duration) throws JOSEException, InvalidKeySpecException, NoSuchAlgorithmException, ParseException {
+    return generateTokenJWT("user-id-123", scope, duration);
   }
 
   public String generateTokenJWT(String subject, String scope, TemporalAmount duration) throws JOSEException, InvalidKeySpecException, NoSuchAlgorithmException, ParseException {

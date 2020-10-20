@@ -44,6 +44,25 @@ public class InvalidRSocketJwtApplicationTest extends RSocketJwtApplicationTest 
     verifyReject("Jwt expired");
   }
 
+  @Test
+  public void whenTokenHasDifferentScopeShouldRejectSetup() throws NoSuchAlgorithmException, InvalidKeySpecException, ParseException, JOSEException {
+    buildRequester(tokenGenerator.generateTokenJWT("ADMIN", Duration.ofMinutes(10)));
+
+    verifyReject("Access Denied");
+  }
+
+  @Test
+  public void whenRemoveSignatureShouldRejectSetup() throws NoSuchAlgorithmException, InvalidKeySpecException, ParseException, JOSEException {
+    String token = tokenGenerator.generateTokenJWT();
+    String header = token.split("\\.")[0];
+    String payload = token.split("\\.")[1];
+
+    token = String.join(".", header, payload, "");
+    buildRequester(token);
+
+    verifyReject("Failed to validate the token");
+  }
+
   private void verifyReject(String expectedMessage) {
     Mono<Void> result = requester.rsocket()
         .onClose();
