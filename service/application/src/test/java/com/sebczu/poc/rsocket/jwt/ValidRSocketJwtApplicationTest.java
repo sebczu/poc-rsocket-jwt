@@ -8,6 +8,7 @@ import reactor.test.StepVerifier;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.text.ParseException;
+import java.time.Duration;
 
 
 public class ValidRSocketJwtApplicationTest extends RSocketJwtApplicationTest {
@@ -21,7 +22,8 @@ public class ValidRSocketJwtApplicationTest extends RSocketJwtApplicationTest {
 
     StepVerifier
         .create(result)
-        .expectComplete();
+        .expectTimeout(Duration.ofSeconds(1))
+        .verify();
   }
 
   @Test
@@ -36,7 +38,8 @@ public class ValidRSocketJwtApplicationTest extends RSocketJwtApplicationTest {
 
     StepVerifier
         .create(result)
-        .expectComplete();
+        .expectTimeout(Duration.ofSeconds(1))
+        .verify();
   }
 
 }
