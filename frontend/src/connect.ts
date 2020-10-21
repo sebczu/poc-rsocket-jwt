@@ -23,6 +23,7 @@ const eventLog = new EventLog();
 function createClient() {
   let tokenJWT = (document.getElementById("tokenJWT") as HTMLInputElement).value;
   let host = (document.getElementById("host") as HTMLInputElement).value;
+  let route = (document.getElementById("routeSetup") as HTMLInputElement).value;
 
   client = new RSocketClient({
     setup: {
@@ -35,7 +36,7 @@ function createClient() {
             Buffer.from(tokenJWT),
           ),
           MESSAGE_RSOCKET_ROUTING,
-          Buffer.from(String.fromCharCode("setup".length) + "setup"),
+          Buffer.from(String.fromCharCode(route.length) + route),
         )
       },
       keepAlive: keepAlive,
