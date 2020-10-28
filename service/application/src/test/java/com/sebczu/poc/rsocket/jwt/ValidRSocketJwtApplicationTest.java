@@ -10,12 +10,11 @@ import java.security.spec.InvalidKeySpecException;
 import java.text.ParseException;
 import java.time.Duration;
 
-
 public class ValidRSocketJwtApplicationTest extends RSocketJwtApplicationTest {
 
   @Test
   public void shouldConnectWhenValidToken() throws NoSuchAlgorithmException, InvalidKeySpecException, ParseException, JOSEException {
-    buildRequester(tokenGenerator.generateTokenJWT("test"));
+    buildRequester(tokenFactory.generateTokenJWT("test"));
 
     Mono<Void> result = requester.rsocket()
         .onClose();
@@ -29,7 +28,7 @@ public class ValidRSocketJwtApplicationTest extends RSocketJwtApplicationTest {
   @Test
   public void shouldInvokeSetupConnectionWhenValidToken() throws NoSuchAlgorithmException, InvalidKeySpecException, ParseException, JOSEException {
     buildRequester(builder
-        .setupMetadata(tokenGenerator.generateTokenJWT("test"), BEARER_MIME_TYPE)
+        .setupMetadata(tokenFactory.generateTokenJWT("test"), BEARER_MIME_TYPE)
         .setupRoute("setup")
         .setupData("client-id"));
 

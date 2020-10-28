@@ -1,4 +1,4 @@
-package com.sebczu.poc.rsocket.jwt;
+package com.sebczu.poc.rsocket.jwt.factory;
 
 import com.nimbusds.jose.JOSEException;
 import com.nimbusds.jose.JWSAlgorithm;
@@ -8,6 +8,7 @@ import com.nimbusds.jose.crypto.RSASSASigner;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.SignedJWT;
+import com.sebczu.poc.rsocket.jwt.property.JwtPrivateKeyProperty;
 import com.sebczu.poc.rsocket.jwt.security.JwtPublicKeyProperty;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ import java.util.Date;
 
 @Slf4j
 @Component
-public class JwtTokenGenerator {
+public class JwtTokenFactory {
 
   private final static JWSAlgorithm ALGORITHM = JWSAlgorithm.RS256;
   private final static Base64.Decoder DECODER = Base64.getMimeDecoder();

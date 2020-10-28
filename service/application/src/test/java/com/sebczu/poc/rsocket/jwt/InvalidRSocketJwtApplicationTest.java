@@ -32,28 +32,28 @@ public class InvalidRSocketJwtApplicationTest extends RSocketJwtApplicationTest 
   @Test
   public void whenInvalidSetupMimeTypeShouldRejectSetup() throws NoSuchAlgorithmException, InvalidKeySpecException, ParseException, JOSEException {
     buildRequester(builder
-        .setupMetadata(tokenGenerator.generateTokenJWT("test"), AUTHENTICATION_MIME_TYPE));
+        .setupMetadata(tokenFactory.generateTokenJWT("test"), AUTHENTICATION_MIME_TYPE));
 
     verifyReject("Access Denied");
   }
 
   @Test
   public void whenTokenExpiredShouldRejectSetup() throws NoSuchAlgorithmException, InvalidKeySpecException, ParseException, JOSEException {
-    buildRequester(tokenGenerator.generateTokenJWT(Duration.ofMinutes(-10)));
+    buildRequester(tokenFactory.generateTokenJWT(Duration.ofMinutes(-10)));
 
     verifyReject("Jwt expired");
   }
 
   @Test
   public void whenTokenHasDifferentScopeShouldRejectSetup() throws NoSuchAlgorithmException, InvalidKeySpecException, ParseException, JOSEException {
-    buildRequester(tokenGenerator.generateTokenJWT("ADMIN", Duration.ofMinutes(10)));
+    buildRequester(tokenFactory.generateTokenJWT("ADMIN", Duration.ofMinutes(10)));
 
     verifyReject("Access Denied");
   }
 
   @Test
   public void whenRemoveSignatureShouldRejectSetup() throws NoSuchAlgorithmException, InvalidKeySpecException, ParseException, JOSEException {
-    String token = tokenGenerator.generateTokenJWT();
+    String token = tokenFactory.generateTokenJWT();
     String header = token.split("\\.")[0];
     String payload = token.split("\\.")[1];
 

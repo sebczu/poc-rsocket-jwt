@@ -1,4 +1,4 @@
-package com.sebczu.poc.rsocket.jwt;
+package com.sebczu.poc.rsocket.jwt.property;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;

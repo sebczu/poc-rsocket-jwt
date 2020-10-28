@@ -1,5 +1,6 @@
 package com.sebczu.poc.rsocket.jwt;
 
+import com.sebczu.poc.rsocket.jwt.factory.JwtTokenFactory;
 import io.rsocket.metadata.WellKnownMimeType;
 import io.rsocket.transport.netty.client.WebsocketClientTransport;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +23,7 @@ public class RSocketJwtApplicationTest {
   protected final static MimeType BEARER_MIME_TYPE = new MimeType("message", "x.rsocket.authentication.bearer.v0");
 
   @Autowired
-  protected JwtTokenGenerator tokenGenerator;
+  protected JwtTokenFactory tokenFactory;
   @Autowired
   protected RSocketRequester.Builder builder;
   @LocalRSocketServerPort
