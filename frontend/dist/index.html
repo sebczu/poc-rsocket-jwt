@@ -1,53 +1,55 @@
 <!DOCTYPE html>
 <html>
-<body>
+<body style="font: 100%/150% calibri,helvetica,sans-serif; background-color: #BEBEBE">
 <script type="module" src="bundle.js"></script>
 
 <h4>Rsocket simple client</h4>
 
-<div style="float:left; width:350px; padding:10px; border: 1px solid black;">
+<div style="float:left; width:350px; padding:10px; border: 1px solid black; background-color: coral;">
 
-    <p style="display: block">Host:</p>
+    <p style="display:block">Host:</p>
     <input id="host" style="display:block; width:100%" value="ws://localhost:7000" />
-    <p style="display: block">Token JWT:</p>
+    <p style="display:block">Token JWT:</p>
     <textarea  id="tokenJWT" cols="40" rows="15" style="display:block; width:100%; max-width:100%; min-width:100%;">eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsInNjb3BlIjoiVVNFUiIsImV4cCI6NDc1ODcwODY0OH0.W_FZG3BV4UHWX5Exl6x_N3hXnggpVdzoWQu8TsmlE__zcQYxB13g_N8EwcmKnUZJAoHJTbeN8SBYsmme0qE3U3QZuGwT7KU7eqtBoPv99Mjsaf8jeHIBrcGkw-E_XDt-5VenaIsjWP7yeFI8K3M9dJY3z85lQ_iWH9vfbQgqGhuFgvXbxFIAK0hit9tDLv1Jx6rBdrSHowrpn9ZTSY-b3a5XS8CEgoE6n5RyZQkV_WE2W59_es2EJ1qr_5FP9EGMz0QogLGdTLg5zAbSmYcxtZdUQwRFKpbJIqhbwH92hcPEWH-7KMtTEFGROdzY7Fxs6y0657p-PfCNvFGTzsoPLw</textarea>
 
-    <p style="float:left; width:100%; margin:4px">Mime type:</p>
-    <div style="float:left; width:100%; margin:4px">
+    <p style="display:block; float:left; width:100%; margin:4px">Mime type:</p>
+    <div style="display:block; float:left; width:100%; margin:4px">
         <input style="float:left; margin:4px" type='radio' name='dataMimeType' id="dataMimeTypeText" value='text/plain' checked>
-        <p style="float:left; margin:4px">text/plain</p>
+        <p style="float:left; margin:0px">text/plain</p>
         <input style="float:left; margin:4px" type='radio' name='dataMimeType' id="dataMimeTypeJson" value='application/json'>
-        <p style="float:left; margin:4px">application/json</p>
+        <p style="float:left; margin:0px">application/json</p>
     </div>
 
-    <p style="float:left; width:15%; margin:4px">Channel:</p>
-    <input id="routeSetup" style="float:left; width:30%; margin:4px" value="setup" />
-    <button id="connect" style="float:left; margin:4px">Connect</button>
-    <button id="disconnect" style="float:left; margin:4px">Disconnect</button>
+    <div style="display:block;">
+        <p style="float:left; width:15%; margin:4px">Channel:</p>
+        <input id="routeSetup" style="float:left; width:30%; margin:4px" value="setup" />
+        <button id="connect" style="float:left; margin:4px">Connect</button>
+        <button id="disconnect" style="float:left; margin:4px" disabled>Disconnect</button>
+    </div>
 
-    <p style="display:block; font-weight:bold">Fire and forget:</p>
+    <p style="float:left; width:100%; font-weight:bold;">Fire and forget:</p>
     <p style="float:left; width:15%; margin:4px">Channel:</p>
     <input id="routeFireAndForget" style="float:left; width:50%; margin:4px" value="fire.and.forget" />
-    <button id="sendFireAndForget" style="float:left; margin:4px">Send</button>
+    <button id="sendFireAndForget" style="float:left; margin:4px" disabled>Send</button>
     <textarea id="messageFireAndForget" rows="1" style="float:left; width:100%; max-width:100%; min-width:100%; margin:4px">example</textarea>
 
-    <p style="display:block; font-weight:bold">Request response:</p>
+    <p style="float:left; width:100%; font-weight:bold;">Request response:</p>
     <p style="float:left; width:15%; margin:4px">Channel:</p>
     <input id="routeRequestResponse" style="float:left; width:50%; margin:4px" value="request.response" />
-    <button id="sendRequestResponse" style="float:left; margin:4px">Send</button>
+    <button id="sendRequestResponse" style="float:left; margin:4px" disabled>Send</button>
     <textarea id="messageRequestResponse" rows="1" style="float:left; width:100%; max-width:100%; min-width:100%; margin:4px">example</textarea>
     
-    <p style="display:block; font-weight:bold">Request stream:</p>
+    <p style="float:left; width:100%; font-weight:bold;">Request stream:</p>
     <p style="float:left; width:15%; margin:4px">Channel:</p>
     <input id="routeRequestStream" style="float:left; width:50%; margin:4px" value="request.stream" />
-    <button id="sendRequestStream" style="float:left; margin:4px">Send</button>
+    <button id="sendRequestStream" style="float:left; margin:4px" disabled>Send</button>
     <textarea id="messageRequestStream" rows="1" style="float:left; width:100%; max-width:100%; min-width:100%; margin:4px">example</textarea>
 
-    <p style="display:block; font-weight:bold">Request channel:</p>
+    <p style="float:left; width:100%; font-weight:bold;">Request channel:</p>
     <p style="float:left; width:15%; margin:4px">Channel:</p>
     <input id="routeRequestChannel" style="float:left; width:50%; margin:4px" value="request.channel" />
-    <button id="sendRequestChannel" style="float:left; margin:4px">Send</button>
-    <textarea id="messageRequestChannel" rows="1" style="float:left; width:100%; max-width:100%; min-width:100%; margin:4px">example</textarea>
+    <button id="sendRequestChannel" style="float:left; margin:4px" disabled>Send</button>
+    <textarea id="messageRequestChannel" rows="1" style="float:left; width:100%; max-width:100%; min-width:100%; margin:4px">a,b,c,d,e,end</textarea>
 </div>
 
 <div style="float:left; width:500px; padding:10px;">

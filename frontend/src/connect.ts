@@ -82,6 +82,8 @@ function tryConnect() {
         } else {
           eventLog.add("connection status: status " + connectionStatus.kind);
         }
+
+        manageButtons(connectionStatus);
       });
 
     },
@@ -191,6 +193,24 @@ function sendRequestChannel() {
       eventLog.add("request: on subscribe");
     },
   });
+}
+
+function manageButtons(connectionStatus) {
+  if (connectionStatus.kind == 'CONNECTED') {
+    (document.getElementById("connect") as HTMLInputElement).disabled = true;
+    (document.getElementById("disconnect") as HTMLInputElement).disabled = false;
+    (document.getElementById("sendFireAndForget") as HTMLInputElement).disabled = false;
+    (document.getElementById("sendRequestResponse") as HTMLInputElement).disabled = false;
+    (document.getElementById("sendRequestStream") as HTMLInputElement).disabled = false;
+    (document.getElementById("sendRequestChannel") as HTMLInputElement).disabled = false;
+  } else {
+    (document.getElementById("connect") as HTMLInputElement).disabled = false;
+    (document.getElementById("disconnect") as HTMLInputElement).disabled = true;
+    (document.getElementById("sendFireAndForget") as HTMLInputElement).disabled = true;
+    (document.getElementById("sendRequestResponse") as HTMLInputElement).disabled = true;
+    (document.getElementById("sendRequestStream") as HTMLInputElement).disabled = true;
+    (document.getElementById("sendRequestChannel") as HTMLInputElement).disabled = true;
+  }
 }
 
 document.getElementById("connect").addEventListener('click', (e:Event) => connect());
