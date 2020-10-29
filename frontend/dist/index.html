@@ -3,7 +3,7 @@
 <body>
 <script type="module" src="bundle.js"></script>
 
-<h4>Hello rsocket jwt</h4>
+<h4>Rsocket simple client</h4>
 
 <div style="float:left; width:350px; padding:10px">
 
@@ -11,6 +11,14 @@
     <input id="host" style="display:block; width:100%" value="ws://localhost:7000" />
     <p style="display: block">Token JWT:</p>
     <textarea  id="tokenJWT" cols="40" rows="15" style="display:block; width:100%">eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsInNjb3BlIjoiVVNFUiIsImV4cCI6NDc1ODcwODY0OH0.W_FZG3BV4UHWX5Exl6x_N3hXnggpVdzoWQu8TsmlE__zcQYxB13g_N8EwcmKnUZJAoHJTbeN8SBYsmme0qE3U3QZuGwT7KU7eqtBoPv99Mjsaf8jeHIBrcGkw-E_XDt-5VenaIsjWP7yeFI8K3M9dJY3z85lQ_iWH9vfbQgqGhuFgvXbxFIAK0hit9tDLv1Jx6rBdrSHowrpn9ZTSY-b3a5XS8CEgoE6n5RyZQkV_WE2W59_es2EJ1qr_5FP9EGMz0QogLGdTLg5zAbSmYcxtZdUQwRFKpbJIqhbwH92hcPEWH-7KMtTEFGROdzY7Fxs6y0657p-PfCNvFGTzsoPLw</textarea>
+
+    <p style="float:left; width:100%; margin:4px">Mime type:</p>
+    <div style="float:left; width:100%; margin:4px">
+        <input style="float:left; margin:4px" type='radio' name='dataMimeType' id="dataMimeTypeText" value='text/plain' checked>
+        <p style="float:left; margin:4px">text/plain</p>
+        <input style="float:left; margin:4px" type='radio' name='dataMimeType' id="dataMimeTypeJson" value='application/json'>
+        <p style="float:left; margin:4px">application/json</p>
+    </div>
 
     <p style="float:left; width:15%; margin:4px">Channel:</p>
     <input id="routeSetup" style="float:left; width:30%; margin:4px" value="setup" />

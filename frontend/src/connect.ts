@@ -20,10 +20,19 @@ let activeSocket: ReactiveSocket<any, Encodable>;
 
 const eventLog = new EventLog();
 
+function getDataMimeType() : string {
+  let isCheckedDataMimeTypeText = (document.getElementById("dataMimeTypeText") as HTMLInputElement).checked;
+  if (isCheckedDataMimeTypeText) {
+    return 'text/plain';
+  }
+  return 'application/json';
+}
+
 function createClient() {
   let tokenJWT = (document.getElementById("tokenJWT") as HTMLInputElement).value;
   let host = (document.getElementById("host") as HTMLInputElement).value;
   let route = (document.getElementById("routeSetup") as HTMLInputElement).value;
+  let dataMimeType = getDataMimeType();
 
   client = new RSocketClient({
     setup: {
@@ -41,7 +50,7 @@ function createClient() {
       },
       keepAlive: keepAlive,
       lifetime: lifetime,
-      dataMimeType: 'text/plain',
+      dataMimeType: dataMimeType,
       metadataMimeType: MESSAGE_RSOCKET_COMPOSITE_METADATA.string,
     },
     transport: new RSocketWebSocketClient({url: host}, BufferEncoders),
