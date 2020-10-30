@@ -213,9 +213,14 @@ function manageButtons(connectionStatus) {
   }
 }
 
+function clearEventLog() {
+  (document.getElementById("eventLog") as HTMLInputElement).innerHTML = "";
+}
+
 document.getElementById("connect").addEventListener('click', (e:Event) => connect());
 document.getElementById("disconnect").addEventListener('click', (e:Event) => disconnect());
 document.getElementById("sendFireAndForget").addEventListener('click', (e:Event) => sendFireAndForget());
 document.getElementById("sendRequestResponse").addEventListener('click', (e:Event) => sendRequestResponse());
 document.getElementById("sendRequestStream").addEventListener('click', (e:Event) => sendRequestStream());
 document.getElementById("sendRequestChannel").addEventListener('click', (e:Event) => sendRequestChannel());
+document.getElementById("clearEventLog").addEventListener('click', (e:Event) => clearEventLog());
