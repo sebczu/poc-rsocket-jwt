@@ -12,7 +12,7 @@
   </parent>
 
   <properties>
-    <spring.boot.dependencies.version>2.3.4.RELEASE</spring.boot.dependencies.version>
+    <spring.boot.dependencies.version>2.3.5.RELEASE</spring.boot.dependencies.version>
   </properties>
 
   <dependencyManagement>
