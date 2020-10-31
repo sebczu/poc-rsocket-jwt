@@ -27,8 +27,7 @@ public class RSocketSecurityConfiguration {
   public PayloadSocketAcceptorInterceptor rsocketInterceptor(RSocketSecurity security) {
     return security.authorizePayload(authorizeSpec ->
         authorizeSpec
-            .setup()
-            .hasAuthority("SCOPE_USER")
+            .setup().hasAuthority("SCOPE_USER")
             .anyExchange().permitAll())
         .jwt(jwtSpec -> jwtSpec.authenticationManager(jwtReactiveAuthenticationManager()))
         .build();

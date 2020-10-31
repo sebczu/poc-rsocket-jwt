@@ -26,9 +26,9 @@ public class ConnectorController {
     requester.rsocket()
         .onClose()
         .doFirst(() -> {
-          log.info("client: {} connected.", client);
+          log.info("client: {} connected", client);
           userDetail.subscribe(user -> {
-            log.info("user: {} added.", user.getSubject());
+            log.info("user: {} added", user.getSubject());
             requesters.put(user.getSubject(), requester);
           });
         })
@@ -38,7 +38,7 @@ public class ConnectorController {
         .doFinally(consumer -> {
           log.info("client: {} disconnected", client);
           userDetail.subscribe(user -> {
-            log.info("user: {} deleted.", user.getSubject());
+            log.info("user: {} deleted", user.getSubject());
             requesters.remove(user.getSubject());
           });
         })
