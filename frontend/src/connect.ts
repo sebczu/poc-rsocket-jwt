@@ -32,12 +32,13 @@ function createClient() {
   let tokenJWT = (document.getElementById("tokenJWT") as HTMLInputElement).value;
   let host = (document.getElementById("host") as HTMLInputElement).value;
   let route = (document.getElementById("routeSetup") as HTMLInputElement).value;
+  let message = (document.getElementById("messageSetup") as HTMLInputElement).value;
   let dataMimeType = getDataMimeType();
 
   client = new RSocketClient({
     setup: {
       payload: {
-        data: Buffer.from("clientId-" + clientId),
+        data: Buffer.from(message),
         metadata: encodeAndAddWellKnownMetadata(
           encodeAndAddCustomMetadata(
             Buffer.alloc(0),
