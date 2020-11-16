@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<body style="font: 100%/150% calibri,helvetica,sans-serif; background-color: #BEBEBE">
+<body style="font: 80%/150% calibri,helvetica,sans-serif; background-color: #BEBEBE">
 <script type="module" src="bundle.js"></script>
 
 <h4>Rsocket simple client</h4>
@@ -25,6 +25,8 @@
         <input id="routeSetup" style="float:left; width:30%; margin:4px" value="setup" />
         <button id="connect" style="float:left; margin:4px">Connect</button>
         <button id="disconnect" style="float:left; margin:4px" disabled>Disconnect</button>
+        <p style="float:left; width:25%; margin:4px">Keep alive[ms]:</p>
+        <input id="keepAlive" style="float:left; width:40%; margin:4px" value="15000" />
         <textarea id="messageSetup" rows="1" style="float:left; width:100%; max-width:100%; min-width:100%; margin:4px">setup data</textarea>
     </div>
 

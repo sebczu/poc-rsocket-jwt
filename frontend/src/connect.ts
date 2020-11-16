@@ -11,10 +11,7 @@ import { Encodable, ReactiveSocket, Payload } from 'rsocket-types';
 import RSocketWebSocketClient from "rsocket-websocket-client";
 import { EventLog } from "./eventLog";
 
-let clientId = Math.floor((Math.random() * 10000) + 1);
-let keepAlive = 60000;
 let lifetime = 70000;
-
 let client: RSocketClient<any, Encodable>;
 let activeSocket: ReactiveSocket<any, Encodable>;
 
@@ -33,6 +30,7 @@ function createClient() {
   let host = (document.getElementById("host") as HTMLInputElement).value;
   let route = (document.getElementById("routeSetup") as HTMLInputElement).value;
   let message = (document.getElementById("messageSetup") as HTMLInputElement).value;
+  let keepAlive = parseInt((document.getElementById("keepAlive") as HTMLInputElement).value);
   let dataMimeType = getDataMimeType();
 
   client = new RSocketClient({
